@@ -5,16 +5,16 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return '<h1>home page</h1>'
+    return '<h1>Grey Wall</h1>'
 
 @app.route('/mei')
 def mei():
     return '<h1>小湄天仙</h1>'
 
-@app.route('/print/<string>')
-def output(string):
-    return '<h2>%s</h2>' %string
-
+@app.route('/sb/<name>')
+def sb(name):
+    return '<h1>%s 是傻逼！</h1>' %name
+	
 if __name__ == '__main__':
-	app.run(debug = True)
+	app.run(host='0.0.0.0',port=80,debug = True)
 
