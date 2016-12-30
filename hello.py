@@ -15,7 +15,7 @@ def hello():
 
 @app.route('/mei')
 def mei():
-    return '<h1>小湄天仙</h1>'
+    return '<h1>小湄天仙 *^ ^*</h1>'
 
 	
 @app.route('/sb/<name>')
