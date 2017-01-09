@@ -1,4 +1,13 @@
-# flask 学习笔记
+# [flask](https://flask.pocoo.org) 学习笔记
+
+Flask非常小，一旦你能熟练使用它，很可能就能读懂它所有的源码。
+
+Flask主要有两个依赖：
+
+- 路由，调试和Web服务器网关接口（WSGI）子系统由[Werkzeug](https://werkzeug.pocoo.org/)提供；
+- 模版系统由[Jinja2](https://jinja2.pocoo.org/)提供
+
+Flask并不原生支持数据库访问，Web表单验证和用户认证等高级功能。这些功能以都以扩展的形式实现。
 
 
 
@@ -231,3 +240,49 @@ runserver	运行Flask 开发服务器： app.run()
 
 
 ## 第3章 模版
+
+
+
+## 第4章 Web表单
+
+
+
+request.form 能获取 POST请求提交的表单数据
+
+更简单的方法：
+
+[Flask-WTF](https://pythonhosted.org/Flask-WTF/)扩展对[WTFrms](https://wtformssimple.com)包进行了包装
+
+`pip install flask-wtf`
+
+ 
+
+### 跨站请求伪造保护
+
+```python
+app = flask(__name__)
+app.config['SECRET_KEY'] = 'hard to guess string'
+```
+
+app.config字典用来存储框架，扩展，程序本身的配置变量。
+
+
+
+### 表单类
+
+```python
+from flask_wtf import Form
+from wtforms import StringField,SubmitField
+from wtforms.validators import Required
+
+class NameForm(Form):
+    name = StringField('what is your name?', validators = [Required()])
+    submit = SubmitField('Submit')
+```
+
+ 
+
+
+
+
+
