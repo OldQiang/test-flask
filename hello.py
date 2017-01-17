@@ -1,6 +1,5 @@
 #-*- coding:utf-8 -*-
 
-
 from datetime import datetime
 from flask import Flask,render_template,session,url_for,redirect
 from flask_bootstrap import Bootstrap
@@ -12,9 +11,9 @@ from wtforms.validators import Required
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '898934'
+app.config['SEVER_NAME'] = 'greywall.dev:80'
 bootstrap = Bootstrap(app)
 mament = Moment(app)
-
 
 class NameForm(Form):
 	name = StringField('what your name?', validators = [Required()])
