@@ -1,7 +1,7 @@
 #-*- coding:utf-8 -*-
 
 from datetime import datetime
-from flask import Flask,render_template,session,url_for,redirect
+from flask import Flask,render_template,session,url_for,redirect,flash
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from flask_wtf import Form
@@ -16,7 +16,7 @@ bootstrap = Bootstrap(app)
 mament = Moment(app)
 
 class NameForm(Form):
-	name = StringField('what your name?', validators = [Required()])
+	name = StringField("what's your name?", validators = [Required()])
 	submit = SubmitField('Submit')
 	
 
@@ -34,6 +34,16 @@ def internal_server_error(e):
 def index():
 	form = NameForm()
 	if form.validate_on_submit():
+		old_name = session.get('name')
+		new_name = form.name.data
+		if old_name is not None and old_name != new_name:
+			if new_name == 'mei angel':
+				flash('LOVE U *^ 3 ^*')
+				flash('LOVE U *^ 3 ^*')
+				flash('LOVE U *^ 3 ^*')
+				flash('LOVE U *^ 3 ^*')
+			else:
+				flash('Hello %s !' % new_name)
 		session['name'] = form.name.data
 		return redirect(url_for('index'))
 	return render_template('index.html', form=form, name=session.get('name'), current_time=datetime.utcnow())
@@ -49,7 +59,7 @@ def labhtml():
     return render_template('labhtml.html')
 
 	
-@app.route('/sb/<int:name>')
+@app.route('/sb/<name>')
 def sb(name):
     return render_template('sb.html',name=name)
 
